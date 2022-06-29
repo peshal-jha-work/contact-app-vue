@@ -3,7 +3,7 @@
     <h2>Enter a new contact</h2>
     <form @submit.prevent="addContact">
       <div class="form-control">
-        <label for="user-name">Your Name</label>
+        <label for="user-name">Name</label>
         <input
           id="user-name"
           name="user-name"
@@ -12,7 +12,7 @@
         />
       </div>
       <div class="form-control">
-        <label for="age">Your Age (Years)</label>
+        <label for="age">Age (Years)</label>
         <input id="age" name="age" type="number" v-model="form.age" />
       </div>
       <div class="form-control">
@@ -44,13 +44,15 @@ export default {
   },
   methods: {
     addContact() {
+      this.contactList.push({ ...this.form });
       console.log(this.form);
       console.log(this.contactList);
-      this.contactList.push(this.form);
 
       this.form.name = "";
       this.form.age = "";
       this.form.mobile = "";
+
+      this.$emit('clicked', this.contactList)
     },
   },
 };
